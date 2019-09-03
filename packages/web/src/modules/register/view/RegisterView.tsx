@@ -1,7 +1,14 @@
 import * as React from "react";
-import { Form, Icon, Input, Button } from "antd";
-import { withFormik, FormikErrors, FormikValues, FormikProps } from "formik";
+import { Form, Button, Icon } from "antd";
+import {
+  withFormik,
+  FormikErrors,
+  FormikValues,
+  FormikProps,
+  Field
+} from "formik";
 import { validationUserSchema } from "@abb/common";
+import { InputField } from "../../shared/InputField";
 
 interface Props {
   submit: (values: FormikValues) => Promise<FormikErrors<FormikValues> | null>;
@@ -10,47 +17,22 @@ const FormItem = Form.Item;
 export const RV: React.FC<FormikProps<FormikValues> & Props> = (
   props
 ): React.ReactElement => {
-  const {
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    values,
-    errors,
-    touched
-  } = props;
-  console.log(errors);
+  const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex" }}>
       <div style={{ margin: "auto", width: "456px" }}>
-        <FormItem
-          help={touched.email && errors.email ? errors.email : ""}
-          validateStatus={touched.email && errors.email ? "error" : undefined}
-        >
-          <Input
-            name="email"
-            prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-            placeholder="email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </FormItem>
-        <FormItem
-          help={touched.password && errors.password ? errors.password : ""}
-          validateStatus={
-            touched.password && errors.password ? "error" : undefined
-          }
-        >
-          <Input
-            name="password"
-            prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-            type="password"
-            placeholder="Password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </FormItem>
+        <Field
+          prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+          name="email"
+          placeholder="Email"
+          component={InputField}
+        />
+        <Field
+          prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+          name="password"
+          placeholder="Password"
+          component={InputField}
+        />
         <FormItem>
           <a className="login-form-forgot" href="google.com">
             Forgot password
