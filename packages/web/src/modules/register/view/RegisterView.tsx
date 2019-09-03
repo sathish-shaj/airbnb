@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Form, Icon, Input, Button } from "antd";
 import { withFormik, FormikErrors, FormikValues, FormikProps } from "formik";
+import * as yup from "yup";
 
 interface Props {
   submit: (values: FormikValues) => Promise<FormikErrors<FormikValues> | null>;
 }
-
 const FormItem = Form.Item;
 export const RV: React.FC<FormikProps<FormikValues> & Props> = (
   props
@@ -25,6 +25,7 @@ export const RV: React.FC<FormikProps<FormikValues> & Props> = (
           />
         </FormItem>
         <FormItem>
+          {/*  */}
           <Input
             name="password"
             prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
