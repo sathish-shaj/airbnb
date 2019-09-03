@@ -1,5 +1,5 @@
-import * as yup from "yup";
 import * as bcrypt from "bcryptjs";
+import * as yup from "yup";
 
 import { ResolverMap } from "../../../types/graphql-utils";
 import { forgotPasswordLockAccount } from "../../../utils/forgotPasswordLockAccount";
@@ -7,7 +7,7 @@ import { createForgotPasswordLink } from "../../../utils/createForgotPasswordLin
 import { User } from "../../../entity/User";
 import { userNotFoundError, expiredKeyError } from "./errorMessages";
 import { forgotPasswordPrefix } from "../../../constants";
-import { registerPasswordValidation } from "../../../yupSchemas";
+import { registerPasswordValidation } from "@abb/common";
 import { formatYupError } from "../../../utils/formatYupError";
 
 // 20 minutes
