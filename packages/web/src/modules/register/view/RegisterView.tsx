@@ -10,11 +10,22 @@ const FormItem = Form.Item;
 export const RV: React.FC<FormikProps<FormikValues> & Props> = (
   props
 ): React.ReactElement => {
-  const { handleBlur, handleChange, handleSubmit, values } = props;
+  const {
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    values,
+    errors,
+    touched
+  } = props;
+  console.log(errors);
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex" }}>
       <div style={{ margin: "auto", width: "456px" }}>
-        <FormItem>
+        <FormItem
+          help={touched.email && errors.email ? errors.email : ""}
+          validateStatus={touched.email && errors.email ? "error" : undefined}
+        >
           <Input
             name="email"
             prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
@@ -24,8 +35,12 @@ export const RV: React.FC<FormikProps<FormikValues> & Props> = (
             onBlur={handleBlur}
           />
         </FormItem>
-        <FormItem>
-          {/*  */}
+        <FormItem
+          help={touched.password && errors.password ? errors.password : ""}
+          validateStatus={
+            touched.password && errors.password ? "error" : undefined
+          }
+        >
           <Input
             name="password"
             prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
@@ -59,7 +74,28 @@ export const RV: React.FC<FormikProps<FormikValues> & Props> = (
   );
 };
 
+const emailNotLongEnough = "email must be at least 3 characters";
+const passwordNotLongEnough = "password must be at least 3 characters";
+const invalidEmail = "email must be a valid email";
+
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .min(3, emailNotLongEnough)
+    .max(255)
+    .email(invalidEmail)
+    .required(),
+  password: yup
+    .string()
+    .min(3, passwordNotLongEnough)
+    .max(255)
+    .required()
+});
+
 export const RegisterView = withFormik<Props, FormikValues>({
+  validationSchema,
+  // validateOnBlur: false,
+  // validateOnChange: false,
   mapPropsToValues: () => ({ email: "", password: "" }),
   handleSubmit: async (values, { props, setErrors }) => {
     const errors = await props.submit(values);

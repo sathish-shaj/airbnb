@@ -4,7 +4,6 @@ import { Routes } from "./routes";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>Hello buddy</h1>
       <Routes />
     </div>
   );
