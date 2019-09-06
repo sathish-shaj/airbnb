@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { RegisterView } from "./view/RegisterView";
 import { RegisterController } from "@abb/controller";
 import { FormikValues, FormikErrors } from "formik";

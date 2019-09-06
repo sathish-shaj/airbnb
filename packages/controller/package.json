@@ -8,7 +8,9 @@
     "build": "rimraf ./dist && tsc"
   },
   "dependencies": {
+    "graphql-tag": "^2.10.1",
     "react": "^16.9.0",
+    "react-apollo": "^3.0.1",
     "react-dom": "^16.9.0"
   },
   "devDependencies": {

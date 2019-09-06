@@ -14,7 +14,7 @@ interface Props {
   submit: (values: FormikValues) => Promise<FormikErrors<FormikValues> | null>;
 }
 const FormItem = Form.Item;
-export const RV: React.FC<FormikProps<FormikValues> & Props> = (
+const RV: React.FC<FormikProps<FormikValues> & Props> = (
   props
 ): React.ReactElement => {
   const { handleSubmit } = props;
