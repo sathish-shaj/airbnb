@@ -1,23 +1,19 @@
 import React from "react";
-import { FormikErrors, FormikValues } from "formik";
 import { useMutation } from "react-apollo";
 import gql from "graphql-tag";
+import {
+  RegisterMutation_register,
+  RegisterMutationVariables
+} from "../../types/Gentypes";
 
 interface Props {
   children: (data: {
-    submit: (
-      values: FormikValues
-    ) => Promise<FormikErrors<FormikValues> | null>;
+    submit: (values: RegisterMutationVariables) => Promise<null>;
   }) => JSX.Element | null;
 }
 
-interface RegisgerInput {
-  path: string;
-  message: string;
-}
-
 const registerMutation = gql`
-  mutation($email: String!, $password: String!) {
+  mutation RegisterMutation($email: String!, $password: String!) {
     register(email: $email, password: $password) {
       path
       message
@@ -28,28 +24,20 @@ const registerMutation = gql`
 export const RegisterController: React.FC<Props> = props => {
   const [input, setInput] = React.useState({ email: "", password: "" });
 
-  const [
-    Response,
-    {
-      error
-      /* ,data */
-    }
-  ] = useMutation<
-    { Response: RegisgerInput },
-    {
-      email: string;
-      password: string;
-    }
+  const [Response, { error, data }] = useMutation<
+    { Response: RegisterMutation_register },
+    RegisterMutationVariables
   >(registerMutation, {
     variables: { email: input.email, password: input.password }
   });
 
-  const submit = async (values: FormikValues) => {
+  const submit = async (values: RegisterMutationVariables) => {
     setInput({ email: values.email, password: values.password });
     await Response();
     if (error) {
       console.log("error", error);
     }
+    console.log("data", data);
     return null;
   };
 
