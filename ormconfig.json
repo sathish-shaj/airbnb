@@ -2,21 +2,8 @@
   {
     "name": "production",
     "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "shaj",
-    "password": "postgres",
-    "database": "graphql-ts-server",
     "synchronize": true,
-    "logging": true,
-    "entities": ["entity/**/*.js"],
-    "migrations": ["migration/**/*.js"],
-    "subscribers": ["subscriber/**/*.js"],
-    "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-    }
+    "logging": true
   },
   {
     "name": "development",
