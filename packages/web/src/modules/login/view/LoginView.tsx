@@ -7,7 +7,7 @@ import {
   FormikProps,
   Field
 } from "formik";
-import { validationUserSchema } from "@abb/common";
+import { LoginSchema } from "@abb/common";
 import { InputField } from "../../shared/InputField";
 import { Link } from "react-router-dom";
 
@@ -15,13 +15,13 @@ interface Props {
   submit: (values: FormikValues) => Promise<FormikErrors<FormikValues> | null>;
 }
 const FormItem = Form.Item;
-const RV: React.FC<FormikProps<FormikValues> & Props> = (
+const LV: React.FC<FormikProps<FormikValues> & Props> = (
   props
 ): React.ReactElement => {
   const { handleSubmit } = props;
   return (
     <>
-      <h1 style={{ textAlign: "center", color: "red" }}>Register Now!</h1>
+      <h1 style={{ textAlign: "center", color: "red" }}>Login</h1>
       <form onSubmit={handleSubmit} style={{ display: "flex" }}>
         <div style={{ margin: "auto", width: "456px" }}>
           <Field
@@ -47,12 +47,12 @@ const RV: React.FC<FormikProps<FormikValues> & Props> = (
               htmlType="submit"
               className="login-form-button"
             >
-              Register Now
+              login
             </Button>
             <div style={{ display: "inline-block", width: "10px" }}></div>
             Or
             <div style={{ display: "inline-block", width: "10px" }}></div>
-            <Link to="/login">login now</Link>
+            <Link to="/register">register now!</Link>
           </FormItem>
         </div>
       </form>
@@ -60,8 +60,8 @@ const RV: React.FC<FormikProps<FormikValues> & Props> = (
   );
 };
 
-export const RegisterView = withFormik<Props, FormikValues>({
-  validationSchema: validationUserSchema,
+export const LoginView = withFormik<Props, FormikValues>({
+  validationSchema: LoginSchema,
   // validateOnBlur: false,
   // validateOnChange: false,
   mapPropsToValues: () => ({ email: "", password: "" }),
@@ -71,4 +71,4 @@ export const RegisterView = withFormik<Props, FormikValues>({
       setErrors(errors);
     }
   }
-})(RV);
+})(LV);

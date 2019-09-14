@@ -4,15 +4,19 @@ import gql from "graphql-tag";
 import {
   RegisterMutation_register,
   RegisterMutationVariables
-} from "../../types/Gentypes";
+} from "../../generatedTypes/RegisterMutation";
 
+// apollo-codegen generate src/**/*.tsx --schema schema.json --target typescript --output Gentypes.ts
+// apollo-codegen introspect-schema http://localhost:4000 --output schema.json
+// new
+// apollo client:codegen --localSchemaFile=schema.json --target=typescript --includes=src/**/*.tsx --tagName=gql --addTy
 interface Props {
   children: (data: {
     submit: (values: RegisterMutationVariables) => Promise<null>;
   }) => JSX.Element | null;
 }
 
-const registerMutation = gql`
+const REGISTER_MUTATION = gql`
   mutation RegisterMutation($email: String!, $password: String!) {
     register(email: $email, password: $password) {
       path
@@ -27,7 +31,7 @@ export const RegisterController: React.FC<Props> = props => {
   const [Response, { error, data }] = useMutation<
     { Response: RegisterMutation_register },
     RegisterMutationVariables
-  >(registerMutation, {
+  >(REGISTER_MUTATION, {
     variables: { email: input.email, password: input.password }
   });
 

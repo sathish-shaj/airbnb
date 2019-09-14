@@ -71,7 +71,7 @@
   "jest": {
     "rootDir": "./src",
     "testURL": "http://localhost",
-    "globalSetup": "testUtils/callSetup.js",
+    "globalSetup": "./testUtils/callSetup.js",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
